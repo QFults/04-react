@@ -1,17 +1,25 @@
+import { useContext } from 'react'
 import {
   ListGroup,
   ListGroupItem,
   Button
 } from 'reactstrap'
+import ItemContext from '../../utils/ItemContext'
 
-const List = props => {
+const List = () => {
+
+  const {
+    items,
+    handleDeleteItem
+  } = useContext(ItemContext)
+
   return (
     <ListGroup>
       {
-        props.items.map((item, i) => (
+        items.map((item, i) => (
           <ListGroupItem key={i}>
             {item}
-            <Button color="danger" onClick={() => props.handleDeleteItem(item)}>X</Button>
+            <Button color="danger" onClick={() => handleDeleteItem(item)}>X</Button>
           </ListGroupItem>
         ))
       }

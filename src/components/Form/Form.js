@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import {
   Button,
   Form as Frm,
@@ -5,19 +6,27 @@ import {
   Label,
   Input
 } from 'reactstrap'
+import ItemContext from '../../utils/ItemContext'
 
-const Form = props => {
+const Form = () => {
+
+  const {
+    item,
+    handleInputChange,
+    handleAddItem
+  } = useContext(ItemContext)
+
   return (
-    <Frm onSubmit={props.handleAddItem}>
+    <Frm onSubmit={handleAddItem}>
       <FormGroup>
         <Label htmlFor="item">Item</Label>
         <Input 
           type="text" 
           name="item"
-          value={props.item}
-          onChange={props.handleInputChange} />
+          value={item}
+          onChange={handleInputChange} />
       </FormGroup>
-      <Button color="primary" onClick={props.handleAddItem}>Add Item</Button>
+      <Button color="primary" onClick={handleAddItem}>Add Item</Button>
     </Frm>
   )
 }
