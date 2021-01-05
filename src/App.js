@@ -1,4 +1,12 @@
 import { useState } from 'react'
+import { 
+  Container,
+  Row, 
+  Col } from 'reactstrap'
+import Navbar from './components/Navbar'
+import Jumbotron from './components/Jumbotron'
+import Form from './components/Form'
+import List from './components/List'
 
 const App = () => {
   const [itemState, setItemState] = useState({
@@ -24,28 +32,25 @@ const App = () => {
   }
   return (
     <>
-      <h1>To-Do List App</h1>
-      <form>
-        <p>
-          <label htmlFor="item">item</label>
-          <input
-            type="text"
-            name="item"
-            value={itemState.item}
-            onChange={handleInputChange} />
-        </p>
-        <button onClick={handleAddItem}>Add Item</button>
-      </form>
-      <ul>
-        {
-          itemState.items.map((item, i) => (
-            <li key={i}>
-              {item}
-              <button onClick={() => handleDeleteItem(item)}>X</button>
-            </li>
-          ))
-        }
-      </ul>
+      <Navbar />
+      <Container>
+        <Row>
+          <Jumbotron />
+        </Row>
+        <Row>
+          <Col xs={6}>
+            <Form 
+              item={itemState.item}
+              handleInputChange={handleInputChange}
+              handleAddItem={handleAddItem} />
+          </Col>
+          <Col xs={6}>
+            <List 
+              items={itemState.items}
+              handleDeleteItem={handleDeleteItem} />
+          </Col>
+        </Row>
+      </Container>
     </>
   )
 }
